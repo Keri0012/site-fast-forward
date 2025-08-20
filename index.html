@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Fast Forward - Captation Vidéo Événementielle</title>
+
+  <style>
+
+    body {
+
+      margin: 0;
+
+      font-family: Arial, sans-serif;
+
+      color: #222;
+
+      line-height: 1.6;
+
+      overflow-x: hidden;
+
+    }
+
+    header {
+
+      position: fixed;
+
+      top: 0;
+
+      left: 0;
+
+      width: 100%;
+
+      background: rgba(0,0,0,0.9);
+
+      color: white;
+
+      padding: 15px 30px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      z-index: 1000;
+
+    }
+
+    header h1 {
+
+      margin: 0;
+
+      font-size: 1.2rem;
+
+    }
+
+    nav ul {
+
+      list-style: none;
+
+      display: flex;
+
+      gap: 20px;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+    nav a {
+
+      color: white;
+
+      text-decoration: none;
+
+    }
+
+    .menu-toggle {
+
+      display: none;
+
+      font-size: 1.5rem;
+
+      cursor: pointer;
+
+    }
+
+    .hero {
+
+      background: url('hero.jpg') center/cover no-repeat;
+
+      height: 100vh;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      color: white;
+
+      text-align: center;
+
+      padding: 20px;
+
+    }
+
+    section {
+
+      padding: 80px 20px;
+
+      max-width: 900px;
+
+      margin: auto;
+
+      opacity: 0;
+
+      transform: translateY(30px);
+
+      transition: all 0.8s ease-out;
+
+    }
+
+    section.visible {
+
+      opacity: 1;
+
+      transform: translateY(0);
+
+    }
+
+    section h2 {
+
+      text-transform: uppercase;
+
+      margin-bottom: 20px;
+
+      color: #333;
+
+    }
+
+    footer {
+
+      background: #111;
+
+      color: white;
+
+      text-align: center;
+
+      padding: 20px;
+
+    }
+
+    form {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 10px;
+
+      max-width: 600px;
+
+      margin: auto;
+
+    }
+
+    input, textarea, button {
+
+      padding: 10px;
+
+      font-size: 1rem;
+
+      border: 1px solid #ccc;
+
+      border-radius: 5px;
+
+    }
+
+    button {
+
+      background: #000;
+
+      color: white;
+
+      border: none;
+
+      cursor: pointer;
+
+      transition: background 0.3s;
+
+    }
+
+    button:hover {
+
+      background: #444;
+
+    }
+
+    @media (max-width: 768px) {
+
+      nav ul {
+
+        display: none;
+
+        flex-direction: column;
+
+        position: absolute;
+
+        top: 60px;
+
+        right: 20px;
+
+        background: rgba(0,0,0,0.95);
+
+        padding: 15px;
+
+        border-radius: 5px;
+
+      }
+
+      nav ul.open {
+
+        display: flex;
+
+      }
+
+      .menu-toggle {
+
+        display: block;
+
+        color: white;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+
+    <h1>Fast Forward</h1>
+
+    <div class="menu-toggle">☰</div>
+
+    <nav>
+
+      <ul>
+
+        <li><a href="#accueil">Accueil</a></li>
+
+        <li><a href="#livestream">Livestream</a></li>
+
+        <li><a href="#captation">Captation Live</a></li>
+
+        <li><a href="#location">Location</a></li>
+
+        <li><a href="#consulting">Consulting</a></li>
+
+        <li><a href="#equipe">Qui sommes-nous</a></li>
+
+        <li><a href="#contact">Contact</a></li>
+
+      </ul>
+
+    </nav>
+
+  </header>
+
+
+
+  <section class="hero" id="accueil">
+
+    <div>
+
+      <h2>Notre dispositif vidéo s’adapte à vos projets</h2>
+
+      <p>Conférences, meetings, salons, webinars, visioconférences, vidéos de formation, ateliers filmés. Fast Forward vous apporte tout son savoir-faire dans la conception vidéo. Découvrez nos services.</p>
+
+    </div>
+
+  </section>
+
+
+
+  <section id="livestream">
+
+    <h2>Livestream</h2>
+
+    <p>Le livestream (direct sur internet) est particulièrement adapté lorsque vous voulez interagir avec votre audience. Il permet une interaction immédiate (tchat) tout en bénéficiant d’un support visuel de qualité. Votre contenu peut également être enrichi d’interventions de collaborateurs ou spécialistes dans le domaine évoqué (conférence hybride).</p>
+
+  </section>
+
+
+
+  <section id="captation">
+
+    <h2>Captation Live</h2>
+
+    <p>Notre dispositif multicam et notre régie permettent de s’adapter à vos besoins de captation d’évènements. Dès la fin de votre évènement, vous disposez d’un film déjà monté. Ce dispositif vous permet de conserver une trace de qualité sans subir les délais et coûts de la post production. Plusieurs configurations sont possibles en fonction de la complexité du lieu, du nombre d’intervenants et du résultat attendu.</p>
+
+  </section>
+
+
+
+  <section id="location">
+
+    <h2>Location de matériel</h2>
+
+    <p>Vous avez déjà votre équipe au complet pour diffuser vos événements et vous cherchez uniquement les moyens techniques pour y parvenir ? Nous vous proposons des prestations de location sur mesure avec dépose / reprise du matériel sur site. Pour une sérénité totale, un membre de notre équipe sera présent pour s’assurer d’une bonne mise en place.</p>
+
+  </section>
+
+
+
+  <section id="consulting">
+
+    <h2>Consulting</h2>
+
+    <p>Pour vos projets vous souhaitez investir dans une configuration vidéo mais ne savez pas sur quel matériel / solution vous orienter ? Fort de 20 ans d’expérience en captation TV et évènementiel, nous vous conseillons pour trouver la solution la mieux adaptée à vos besoins et à votre budget. Nous proposons également une prestation de supervision de vos équipes en interne lors du déploiement du dispositif que vous aurez choisi.</p>
+
+  </section>
+
+
+
+  <section id="equipe">
+
+    <h2>Qui sommes-nous ?</h2>
+
+    <p>Notre équipe est composée de techniciens et réalisateurs issus du monde de la télévision et du broadcast. Nous mettons tout notre savoir-faire acquis tout au long de nos carrières.</p>
+
+  </section>
+
+
+
+  <section id="contact">
+
+    <h2>Contact</h2>
+
+    <form action="https://formspree.io/f/your-form-id" method="POST">
+
+      <input type="text" name="name" placeholder="Votre nom" required>
+
+      <input type="email" name="email" placeholder="Votre email" required>
+
+      <textarea name="message" rows="5" placeholder="Votre message" required></textarea>
+
+      <button type="submit">Envoyer</button>
+
+    </form>
+
+  </section>
+
+
+
+  <footer>
+
+    © 2025 - Fast Forward | Captation Vidéo Événementielle
+
+  </footer>
+
+
+
+  <script>
+
+    // Menu mobile
+
+    const toggle = document.querySelector('.menu-toggle');
+
+    const navMenu = document.querySelector('nav ul');
+
+    toggle.addEventListener('click', () => {
+
+      navMenu.classList.toggle('open');
+
+    });
+
+
+
+    // Animation au scroll
+
+    const sections = document.querySelectorAll('section');
+
+    const revealOnScroll = () => {
+
+      const triggerBottom = window.innerHeight * 0.85;
+
+      sections.forEach(section => {
+
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top < triggerBottom) {
+
+          section.classList.add('visible');
+
+        }
+
+      });
+
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+
+    window.addEventListener('load', revealOnScroll);
+
+  </script>
+
+</body>
+
+</html>
