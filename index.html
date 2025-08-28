@@ -5,6 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fast Forward - Captation Vidéo Événementielle</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body, section, p, h2, h1, nav a, footer {
+      color: white !important;
+    }
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    header h1 {
+      margin-bottom: 10px;
+    }
+    nav ul {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    nav a {
+      white-space: nowrap;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+    nav a:hover {
+      color: #ffd700; /* doré au survol */
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+    }
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: flex-end; /* texte en bas */
+      justify-content: center;
+      color: white;
+      text-align: center;
+      padding: 40px 20px; /* espace avec le bas */
+      position: relative;
+      z-index: 1;
+    }
+    .hero p {
+      max-width: 800px;
+    }
+  </style>
 </head>
 
 <body>
@@ -35,42 +80,42 @@
 
   <section class="hero" id="accueil">
     <div>
-      <h2>Notre dispositif vidéo s’adapte à vos projets</h2>
       <p>Conférences, meetings, salons, webinars, visioconférences, vidéos de formation, ateliers filmés. Fast Forward vous apporte tout son savoir-faire dans la conception vidéo. Découvrez nos services.</p>
     </div>
   </section>
 
   <section id="livestream">
     <h2>Livestream</h2>
-    <p>Le livestream (direct sur internet) est particulièrement adapté lorsque vous voulez interagir avec votre audience. Il permet une interaction immédiate (tchat) tout en bénéficiant d’un support visuel de qualité.</p>
+    <p>Le livestream (direct sur internet) est particulièrement adapté lorsque vous voulez interagir avec votre audience. Il permet une interaction immédiate (tchat) tout en bénéficiant d’un support visuel de qualité. Votre contenu peut également être enrichi d’interventions de collaborateurs ou spécialistes dans le domaine évoqué (conférence hybride).</p>
   </section>
 
   <section id="captation">
     <h2>Captation Live</h2>
-    <p>Notre dispositif multicam et notre régie permettent de s’adapter à vos besoins de captation d’évènements.</p>
+    <p>Notre dispositif multicam et notre régie permettent de s’adapter à vos besoins de captation d’évènements. Dès la fin de votre évènement, vous disposez d’un film déjà monté. Ce dispositif vous permet de conserver une trace de qualité sans subir les délais et coûts de la post production. Plusieurs configurations sont possibles en fonction de la complexité du lieu, du nombre d’intervenants et du résultat attendu.</p>
   </section>
 
   <section id="location">
     <h2>Location de matériel</h2>
-    <p>Nous vous proposons des prestations de location sur mesure avec dépose / reprise du matériel sur site.</p>
+    <p>Vous avez déjà votre équipe au complet pour diffuser vos événements et vous cherchez uniquement les moyens techniques pour y parvenir ? Nous vous proposons des prestations de location sur mesure avec dépose / reprise du matériel sur site. Pour une sérénité totale, un membre de notre équipe sera présent pour s’assurer d’une bonne mise en place.</p>
   </section>
 
   <section id="consulting">
     <h2>Consulting</h2>
-    <p>Fort de 20 ans d’expérience en captation TV et évènementiel, nous vous conseillons pour trouver la solution adaptée.</p>
+    <p>Pour vos projets vous souhaitez investir dans une configuration vidéo mais ne savez pas sur quel matériel / solution vous orienter ? Fort de 20 ans d’expérience en captation TV et évènementiel, nous vous conseillons pour trouver la solution la mieux adaptée à vos besoins et à votre budget. Nous proposons également une prestation de supervision de vos équipes en interne lors du déploiement du dispositif que vous aurez choisi.</p>
   </section>
 
   <section id="equipe">
     <h2>Qui sommes-nous ?</h2>
-    <p>Notre équipe est composée de techniciens et réalisateurs issus du monde de la télévision et du broadcast.</p>
+    <p>Notre équipe est composée de techniciens et réalisateurs issus du monde de la télévision et du broadcast. Nous mettons tout notre savoir-faire acquis tout au long de nos carrières.</p>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <form action="https://formspree.io/f/your-form-id" method="POST">
+    <form action="https://formspree.io/f/mvgbgnrl" method="POST">
       <input type="text" name="name" placeholder="Votre nom" required>
       <input type="email" name="email" placeholder="Votre email" required>
       <textarea name="message" rows="5" placeholder="Votre message" required></textarea>
+      <input type="text" name="_gotcha" style="display:none">
       <button type="submit">Envoyer</button>
     </form>
   </section>
