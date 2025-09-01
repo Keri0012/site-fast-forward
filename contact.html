@@ -32,15 +32,19 @@
     <h1 class="page-title">Contact</h1>
 
     <section class="contact-form-wrapper">
-      <form class="contact-form" action="#" method="post" novalidate>
+      <!-- Lead text above the form -->
+      <p class="contact-lead">Une question, une demande de devis ou une étude de faisabilité ?<br>N’hésitez pas !</p>
+
+      <form class="contact-form" action="https://formspree.io/f/mvgbgnrl" method="post" novalidat method="post">
         <div class="form-row">
-          <div class="form-field">
+          <input type="hidden" name="_subject" value="Nouveau message — Site Fast Forward">
+        <div class="form-field">
             <label for="fullname">Nom complet</label>
             <input type="text" id="fullname" name="fullname" placeholder="Votre nom" required>
           </div>
           <div class="form-field">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="nom@domaine.com" required>
+            <input type="email" id="email" name="email" placeholder="nom@domaine.com" required" name="email">
           </div>
         </div>
 
@@ -63,9 +67,13 @@
         <div class="form-actions">
           <button type="submit" class="btn-primary">Envoyer</button>
         </div>
-      </form>
+      
+  <div class="form-alert form-success" role="status" style="display:none;">Merci, votre message a bien été envoyé.</div>
+  <div class="form-alert form-error" role="alert" style="display:none;">Oups, l’envoi a échoué. Réessayez ou envoyez-nous un email.</div>
+</form>
     </section>
   </main>
+
   <script src="script.js" defer></script>
 </body>
 </html>
