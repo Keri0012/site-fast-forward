@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accueil - Fast Forward</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+  <a class="logo" href="index.html" aria-label="Fast Forward — Accueil">
+    <img src="images/logo.png" alt="Fast Forward" class="logo-img">
+  </a>
+  <nav aria-label="Navigation principale">
+    <ul>
+      <li><a href="index.html">ACCUEIL</a></li>
+      <li><a href="news.html">NEWS</a></li>
+      <li><a href="livestream.html">LIVESTREAM / CAPTATION LIVE</a></li>
+      <li><a href="location.html">LOCATION</a></li>
+      <li><a href="consulting.html">CONSULTING</a></li>
+      <li><a href="equipe.html">QUI SOMMES-NOUS</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+  </nav>
+  <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div id="menu-backdrop" aria-hidden="true"></div>
+</header>
+
+  <section class="hero">
+    <video autoplay muted loop playsinline id="bg-video">
+      <source src="videos/ma_video.mp4" type="video/mp4" />
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
+  </section>
+
+  <section class="content-section">
+    <h2>OFFREZ A VOS EVENEMENTS L’IMPACT D’UNE CAPTATION VIDEO PRO</h2>
+    <p>
+      Notre dispositif vidéo s’adapte à des projets d’envergure (conférences, meetings, salons) 
+      comme à des projets plus confidentiels comme des webinars, visioconférences, vidéos de formation, ateliers filmés.<br><br>
+      Fast Forward vous apporte tout son savoir-faire dans la conception vidéo. 
+      Son équipe est constituée de professionnels ayant travaillé de nombreuses années en événementiel et en télévision. 
+      Nous saurons répondre à vos besoins en mettant en œuvre les moyens techniques adaptés à votre projet.<br><br>
+      Découvrez nos services.
+    </p>
+  </section>
+  <script src="script.js" defer></script>
+</body>
+</html>
