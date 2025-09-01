@@ -1,5 +1,6 @@
-/* ===== Base ===== */
-* { box-sizing: border-box; }
+/* ------------------------
+   Base
+------------------------- */
 body {
   margin: 0;
   font-family: "Red Hat Display", sans-serif;
@@ -8,167 +9,193 @@ body {
   line-height: 1.6;
 }
 
-/* ===== Header (fixed, visible) ===== */
+h1, h2, h3, h4 {
+  margin: 20px 0;
+  font-weight: 700;
+}
+
+p {
+  margin: 15px 0;
+  font-size: 1.1rem;
+}
+
+/* ------------------------
+   Header + Navigation
+------------------------- */
 header {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.7);
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.40));
-  z-index: 10000;
+  z-index: 1000;
 }
-header .logo { margin-right: auto; text-decoration: none; }
-header .logo img.logo-img { height: 32px; width: auto; display: block; }
-header nav ul {
+
+header .logo {
+  height: 50px;
+}
+
+nav ul {
   list-style: none;
-  display: flex;
-  gap: 24px;
+  display: flex;             /* Menu horizontal par défaut */
+  gap: 25px;
   margin: 0;
   padding: 0;
-  align-items: center;
 }
-header nav a { color: #fff; text-decoration: none; }
-header nav a:hover { text-decoration: underline; }
-.burger { display: none; margin-left: 12px; background: transparent; border: 0; cursor: pointer; }
-.burger span { display:block; width:22px; height:2px; margin:5px 0; background:#fff; }
 
-/* Padding to offset fixed header */
-body { padding-top: 80px; }
-
-/* ===== Hero (video fullscreen) ===== */
-.hero { 
-  position: relative; 
-  height: 100vh; 
-  overflow: hidden; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  text-align: center;
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase; /* Onglets en majuscules */
+  transition: color 0.3s;
 }
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #ffcc00;
+}
+
+/* Burger menu (caché en desktop) */
+.burger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* ------------------------
+   Sections
+------------------------- */
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
 #bg-video {
-  position: absolute; 
-  top: 0; left: 0; 
-  width: 100%; height: 100%; 
-  object-fit: cover; 
-  z-index: 0;
-  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
-.hero .overlay { position: relative; z-index: 1; }
 
-/* ===== Generic content section ===== */
 .content-section {
   max-width: 1000px;
-  margin: 40px auto;
-  padding: 0 20px;
+  margin: 120px auto;
+  padding: 20px;
   text-align: center;
 }
 
-/* ===== Backdrop + menu mobile ===== */
-#menu-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(2px);
-  display: none;
-  z-index: 9998;
+.content-section h1, 
+.content-section h2 {
+  color: #fff;
 }
-body.menu-open #menu-backdrop { display: block; }
 
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* ------------------------
+   Formulaire contact
+------------------------- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+form input, 
+form textarea {
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+form button {
+  background: #ffcc00;
+  color: #000;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #e6b800;
+}
+/* Menu desktop (toujours visible) */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+/* ------------------------
+   Responsive
+------------------------- */
 @media (max-width: 768px) {
-  .burger { display: block; }
-  header nav ul {
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    width: 260px;
-    padding: 20px;
-    display: none;
+  nav ul {
     flex-direction: column;
     gap: 15px;
-    background: rgba(0,0,0,0.95);
-    border-radius: 8px;
-    z-index: 10000;
+    background: rgba(0, 0, 0, 0.95);
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 220px;
+    padding: 20px;
+    display: none; /* Masqué par défaut */
   }
-  header nav ul.show { display: flex; }
+
+  nav ul.show {
+    display: flex; /* Affiché quand le burger est cliqué */
+  }
+
+  .burger {
+    display: block; /* Le burger s'affiche sur mobile */
+  }
 }
 
-/* ===== News page (Instagram grid) ===== */
-.page-title {
-  max-width: 1000px;
-  margin: 20px auto 10px;
-  padding: 0 20px;
-  text-align: center;
-}
+
+/* === Fix: News grid 2 columns on desktop, full width embeds === */
 .news-grid {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 20px auto 60px;
   padding: 0 20px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 32px;
+  align-items: start;
 }
 @media (max-width: 900px) {
   .news-grid { grid-template-columns: 1fr; }
 }
-.insta-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 16px;
-}
-.insta-embed { display: block; width: 100%; }
-.insta-caption {
-  margin-top: 12px;
-  font-size: 0.95rem;
-  line-height: 1.45;
-  color: #fff;
-  opacity: 0.9;
-}
+.insta-card { display: flex; flex-direction: column; height: 100%; }
+.insta-embed { width: 100%; }
 
-/* ===== Contact page form ===== */
-.contact-page .page-title { max-width: 1000px; margin: 20px auto 10px; padding: 0 20px; text-align: center; }
-.contact-form-wrapper { max-width: 1000px; margin: 10px auto 60px; padding: 0 20px; }
-.contact-form {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
-  padding: 24px;
-  backdrop-filter: blur(2px);
+/* Stretch Instagram embeds to container width and remove extra margins */
+.insta-embed .instagram-media,
+.insta-embed iframe {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
 }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-@media (max-width: 800px) { .form-row { grid-template-columns: 1fr; } }
-.form-field { display: flex; flex-direction: column; gap: 6px; }
-.form-field label { font-weight: 600; font-size: 0.95rem; }
-.form-field input, .form-field textarea, .form-field select {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.05);
-  color: #fff;
-  outline: none;
-}
-.form-field input::placeholder, .form-field textarea::placeholder { color: rgba(255,255,255,0.6); }
-.form-field input:focus, .form-field textarea:focus, .form-field select:focus {
-  border-color: #fff;
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.15);
-}
-.form-actions { margin-top: 16px; display: flex; justify-content: flex-end; }
-.btn-primary {
-  appearance: none;
-  border: 0;
-  border-radius: 10px;
-  padding: 12px 18px;
-  background: #ffffff;
-  color: #000000;
-  font-weight: 700;
-  cursor: pointer;
-}
-.btn-primary:hover { opacity: 0.9; }
-.btn-primary:active { transform: translateY(1px); }
-input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
-  -webkit-text-fill-color: #fff;
-  -webkit-box-shadow: 0 0 0px 1000px rgba(255,255,255,0.05) inset;
-  box-shadow: 0 0 0px 1000px rgba(255,255,255,0.05) inset;
-}
+/* Keep caption spacing consistent */
+.insta-caption { margin-top: 12px; min-height: 2.2em; }
