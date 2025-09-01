@@ -1,3 +1,4 @@
+*, *::before, *::after { box-sizing: border-box; }
 /* ------------------------
    Base
 ------------------------- */
@@ -174,28 +175,173 @@ nav ul {
 }
 
 
-/* === Fix: News grid 2 columns on desktop, full width embeds === */
-.news-grid {
-  max-width: 1200px;
-  margin: 20px auto 60px;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 32px;
-  align-items: start;
-}
-@media (max-width: 900px) {
-  .news-grid { grid-template-columns: 1fr; }
-}
-.insta-card { display: flex; flex-direction: column; height: 100%; }
-.insta-embed { width: 100%; }
+/* === Logo size tuning (consistent across pages) === */
+:root { --logo-height: 28px; }               /* mobile/tablette */
+@media (min-width: 768px) { :root { --logo-height: 32px; } }  /* desktop */
 
-/* Stretch Instagram embeds to container width and remove extra margins */
-.insta-embed .instagram-media,
-.insta-embed iframe {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
+header .logo img.logo-img {
+  height: var(--logo-height) !important;
+  width: auto;
+  display: block;
 }
-/* Keep caption spacing consistent */
-.insta-caption { margin-top: 12px; min-height: 2.2em; }
+
+
+/* === Header visibility + menu (safe defaults) === */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.35));
+  z-index: 10000;
+}
+header .logo img.logo-img { height: var(--logo-height, 32px); width: auto; display: block; }
+header nav ul {
+  min-width: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+header nav a { color: #fff; text-decoration: none; }
+header nav a:hover { text-decoration: underline; }
+
+.burger { display: none; background: transparent; border: 0; cursor: pointer; margin-left: 12px; }
+.burger span { display:block; width:22px; height:2px; margin:5px 0; background:#fff; }
+
+/* Réserver de la place pour le header fixe */
+body { padding-top: 80px; }
+
+/* Backdrop + menu mobile */
+#menu-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; z-index: 9998; }
+body.menu-open #menu-backdrop { display: block; }
+
+@media (max-width: 768px) {
+  .burger { display: block; }
+  header nav ul {
+  min-width: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    width: 260px;
+    padding: 20px;
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    background: rgba(0,0,0,0.95);
+    border-radius: 8px;
+    z-index: 10000;
+  }
+  header nav ul.show { display: flex; }
+}
+
+
+/* === HOTFIX: Header/menu visible, no overflow, burger on mobile === */
+:root { --logo-height: 28px; }
+@media (min-width: 1024px) { :root { --logo-height: 32px; } }
+
+header {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.35));
+  z-index: 10000;
+  overflow-x: clip;
+}
+header { display: flex; align-items: center; gap: 16px; padding: 12px 20px; }
+header .logo { flex: 0 0 auto; text-decoration: none; }
+header .logo img.logo-img { height: var(--logo-height) !important; width: auto; display: block; }
+header nav { flex: 1 1 auto; }
+header nav ul {
+  min-width: 0;
+  max-width: 100%;
+  list-style: none; margin: 0; padding: 0;
+  display: flex; justify-content: flex-end; align-items: center;
+  gap: 18px; flex-wrap: wrap;  /* wrap to avoid overflow */
+}
+header nav a { color: #fff; text-decoration: none; }
+header nav a:hover { text-decoration: underline; }
+.burger { display: none; margin-left: 8px; background: transparent; border: 0; cursor: pointer; }
+.burger span { display:block; width:22px; height:2px; margin:5px 0; background:#fff; }
+
+/* Reserve space for fixed header */
+body { padding-top: 76px; }
+
+/* Backdrop + mobile menu */
+#menu-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; z-index: 9998; }
+body.menu-open #menu-backdrop { display: block; }
+
+@media (max-width: 1024px) {
+  .burger { display: block; }
+  header nav ul {
+  min-width: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+    position: absolute; top: 64px; right: 16px;
+    width: min(90vw, 320px);
+    display: none; flex-direction: column; gap: 14px;
+    background: rgba(0,0,0,0.96);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 16px; z-index: 10000;
+  }
+  header nav ul.show { display: flex; }
+}
+
+/* === HOTFIX: News grid (2 cols desktop) + fluid IG embeds === */
+.news-grid {
+  max-width: 1200px; margin: 20px auto 60px; padding: 0 20px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px; align-items: start;
+}
+@media (max-width: 900px) { .news-grid { grid-template-columns: 1fr; } }
+.insta-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.insta-embed .instagram-media, .insta-embed iframe { width: 100% !important; max-width: 100% !important; margin: 0 !important; }
+.insta-caption { margin-top: 4px; font-size: 0.95rem; line-height: 1.45; color: #fff; opacity: 0.9; }
+
+/* === HOTFIX: Contact form styles (clean layout) === */
+.contact-page .page-title { max-width: 1000px; margin: 20px auto 10px; padding: 0 20px; text-align: center; }
+.contact-form-wrapper { max-width: 1000px; margin: 10px auto 60px; padding: 0 20px; }
+.contact-lead { text-align: center; opacity: .95; margin: 0 0 16px; }
+.contact-form { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 24px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 800px) { .form-row { grid-template-columns: 1fr; } }
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+.form-field label { font-weight: 600; font-size: 0.95rem; }
+.form-field input, .form-field textarea, .form-field select {
+  width: 100%; padding: 12px 14px; border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.05);
+  color: #fff; outline: none;
+}
+.form-field input::placeholder, .form-field textarea::placeholder { color: rgba(255,255,255,0.6); }
+.form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,0.15); }
+.form-actions { margin-top: 16px; display: flex; justify-content: flex-end; }
+.btn-primary { appearance: none; border: 0; border-radius: 10px; padding: 12px 18px; background: #fff; color:#000; font-weight: 700; cursor: pointer; }
+.btn-primary:hover { opacity: .9; }
+.form-alert { margin-top: 12px; padding: 12px 14px; border-radius: 10px; font-weight: 600; }
+.form-success { background: rgba(46, 204, 113, 0.15); border: 1px solid rgba(46, 204, 113, 0.4); color: #2ecc71; }
+.form-error   { background: rgba(231, 76, 60, 0.15);  border: 1px solid rgba(231, 76, 60, 0.4);  color: #e74c3c; }
+
+
+/* === Anti-overflow safety (no horizontal scroll) === */
+html, body { max-width: 100%; overflow-x: hidden; }
+header { overflow-x: hidden; }
+header nav ul {
+  min-width: 0;
+  justify-content: flex-end; max-width: 100%; flex-wrap: wrap; }
+
+/* Media should never overflow */
+img, video, iframe, .instagram-media { display: block; max-width: 100% !important; height: auto; }
+.news-grid, .insta-card, .insta-embed { min-width: 0; }
+.insta-embed .instagram-media, .insta-embed iframe {
+  width: 100% !important; max-width: 100% !important; min-width: 0 !important; margin: 0 !important;
+}
