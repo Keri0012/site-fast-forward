@@ -1,55 +1,155 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Livestream / Captation Live - Fast Forward</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-  <a class="logo" href="index.html" aria-label="Fast Forward — Accueil">
-    <img src="images/logo.png" alt="Fast Forward" class="logo-img">
-  </a>
-  <nav aria-label="Navigation principale">
-    <ul>
-      <li><a href="index.html">ACCUEIL</a></li>
-      <li><a href="news.html">NEWS</a></li>
-      <li><a href="livestream.html">LIVESTREAM / CAPTATION LIVE</a></li>
-      <li><a href="location.html">LOCATION</a></li>
-      <li><a href="consulting.html">CONSULTING</a></li>
-      <li><a href="equipe.html">QUI SOMMES-NOUS</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
-    </ul>
-  </nav>
-  <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
-    <span></span><span></span><span></span>
-  </button>
-  <div id="menu-backdrop" aria-hidden="true"></div>
-</header>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Livestream / Captation Live - Fast Forward</title>
+<link href="style.css" rel="stylesheet"/>
+<style id="ff-bugfix">/* === Fast-Forward bugfixes (desktop overflow & mobile burger) === */
+header { display:flex; align-items:center; gap:24px; padding:12px 20px; box-sizing:border-box; }
+.logo { flex:0 0 auto; }
+header nav { flex:1 1 auto; min-width:0; }
 
-  <section class="hero">
-    <video autoplay muted loop playsinline>
-      <source src="videos/video-livestream.mp4" type="video/mp4">
+/* Desktop: allow wrap to avoid overflow of "CONTACT" */
+@media (min-width: 961px) {
+  header nav ul { display:flex; flex-wrap:wrap; gap:14px 20px; justify-content:flex-end; margin:0; padding:0; list-style:none; }
+  header nav a { white-space:nowrap; text-decoration:none; }
+}
+
+/* Mobile first: menu hidden by default */
+@media (max-width: 960px) {
+  header { position: relative; }
+  button.burger { appearance:none; border:0; background:transparent; padding:10px; cursor:pointer; }
+  button.burger span { display:block; width:24px; height:2px; margin:5px 0; background:currentColor; transition:transform .2s, opacity .2s; }
+  /* Hidden menu */
+  header nav { display:none; }
+  /* Opened state */
+  header.is-open nav {
+    display:block;
+    position:fixed;
+    top:0; right:0; bottom:0;
+    width:82vw; max-width:360px;
+    background:#fff;
+    padding:24px 20px;
+    box-shadow:-10px 0 30px rgba(0,0,0,.12);
+    z-index:1001;
+    overflow:auto;
+  }
+  /* Backdrop */
+  #menu-backdrop[aria-hidden="false"] {
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.35);
+    backdrop-filter:blur(2px);
+    z-index:1000;
+    pointer-events:auto;
+  }
+  /* Burger -> X */
+  button.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  button.burger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+  button.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+/* === /bugfixes === */
+#menu-backdrop { pointer-events: none; }
+#menu-backdrop[aria-hidden="false"] {
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.35);
+    backdrop-filter:blur(2px);
+    z-index:1000;
+    pointer-events:auto;
+  }
+</style></head>
+<body>
+<header>
+<a aria-label="Fast Forward — Accueil" class="logo" href="index.html">
+<img alt="Fast Forward" class="logo-img" src="images/logo.png"/>
+</a>
+<nav aria-label="Navigation principale" id="menu">
+<ul>
+<li><a href="index.html">ACCUEIL</a></li>
+<li><a href="news.html">NEWS</a></li>
+<li><a href="livestream.html">LIVESTREAM / CAPTATION LIVE</a></li>
+<li><a href="location.html">LOCATION</a></li>
+<li><a href="consulting.html">CONSULTING</a></li>
+<li><a href="equipe.html">QUI SOMMES-NOUS</a></li>
+<li><a href="contact.html">CONTACT</a></li>
+</ul>
+</nav>
+<button aria-controls="menu" aria-expanded="false" aria-label="Menu" class="burger">
+<span></span><span></span><span></span>
+</button>
+
+</header>
+<section class="hero">
+<video autoplay="" loop="" muted="" playsinline="">
+<source src="videos/video-livestream.mp4" type="video/mp4"/>
       Votre navigateur ne supporte pas la vidéo.
     </video>
-  </section>
-
-  <section class="content-section">
-    <h1>LIVESTREAM / CAPTATION LIVE</h1>
-    <p>
+</section>
+<section class="content-section">
+<h1>LIVESTREAM / CAPTATION LIVE</h1>
+<p>
       Le livestream (direct sur internet) est particulièrement adapté lorsque vous voulez interagir avec votre audience. 
       Il permet une interaction immédiate (tchat) tout en bénéficiant d’un support visuel de qualité. Votre contenu peut également 
       être enrichi d’interventions de collaborateurs ou spécialistes dans le domaine évoqué (conférence hybride). 
-      Il permet aussi de toucher un public plus large qui n’a pas forcément la possibilité de venir en présentiel.<br><br>
+      Il permet aussi de toucher un public plus large qui n’a pas forcément la possibilité de venir en présentiel.<br/><br/>
       Notre dispositif multicaméras et notre régie, permettent de s’adapter à vos besoins de captation. 
       Que se soit pour un direct ou un enregistrement. Dès la fin de votre projet (qu’il ait été en direct ou enregistré par nos soins) 
       vous disposez d’un film déjà monté. Ce dispositif vous permet de conserver une trace de qualité sans subir les délais 
-      et couts de la post-production.<br><br>
+      et couts de la post-production.<br/><br/>
       Plusieurs configurations sont possibles en fonction de la complexité du lieu, du nombre d’intervenants et du résultat attendu. 
       Nous définissons ensemble la solution la plus adaptée à vos besoins.
     </p>
-  </section>
-  <script src="script.js" defer></script>
-</body>
+</section>
+<script defer="" src="script.js"></script>
+<div aria-hidden="true" id="menu-backdrop"></div><script id="ff-bugfix-js">
+// === Fast-Forward bugfixes: burger toggle (v2) ===
+document.addEventListener('DOMContentLoaded', () => {
+  const header   = document.querySelector('header');
+  const burger   = document.querySelector('button.burger');
+  const menu     = document.getElementById('menu');
+  const backdrop = document.getElementById('menu-backdrop');
+  const list = menu ? menu.querySelector('ul') : null;
+
+  function isOpen() {
+    return burger && burger.getAttribute('aria-expanded') === 'true';
+  }
+  function setOpen(open) {
+    if (list) list.classList.toggle('show', !!open);
+    header?.classList.toggle('is-open', open);
+    if (burger) burger.setAttribute('aria-expanded', String(open));
+    if (backdrop) backdrop.setAttribute('aria-hidden', String(!open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  burger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setOpen(!isOpen());
+  });
+
+  backdrop?.addEventListener('click', () => setOpen(false));
+
+  // Close on ESC
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+
+  // Close when clicking any link inside the menu
+  menu?.addEventListener('click', (e) => {
+    const a = e.target && (e.target.closest ? e.target.closest('a') : null);
+    if (a) setOpen(false);
+  });
+
+  // Close when clicking anywhere outside the menu/burger (capture phase for reliability)
+  document.addEventListener('pointerdown', (e) => {
+    if (!isOpen()) return;
+    const target = e.target;
+    const withinMenu = menu && (target === menu || (target.closest && target.closest('#menu')));
+    const onBurger = burger && (target === burger || (target.closest && target.closest('button.burger')));
+    if (!withinMenu && !onBurger) {
+      setOpen(false);
+    }
+  }, true);
+});
+// === /bugfixes ===
+</script></body>
 </html>

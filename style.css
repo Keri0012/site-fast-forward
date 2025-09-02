@@ -1,4 +1,3 @@
-*, *::before, *::after { box-sizing: border-box; }
 /* ------------------------
    Base
 ------------------------- */
@@ -199,10 +198,6 @@ header {
 }
 header .logo img.logo-img { height: var(--logo-height, 32px); width: auto; display: block; }
 header nav ul {
-  min-width: 0;
-  max-width: 100%;
-  flex-wrap: wrap;
-  justify-content: flex-end;
   list-style: none;
   display: flex;
   gap: 24px;
@@ -226,10 +221,6 @@ body.menu-open #menu-backdrop { display: block; }
 @media (max-width: 768px) {
   .burger { display: block; }
   header nav ul {
-  min-width: 0;
-  max-width: 100%;
-  flex-wrap: wrap;
-  justify-content: flex-end;
     position: absolute;
     top: 70px;
     right: 20px;
@@ -261,8 +252,6 @@ header .logo { flex: 0 0 auto; text-decoration: none; }
 header .logo img.logo-img { height: var(--logo-height) !important; width: auto; display: block; }
 header nav { flex: 1 1 auto; }
 header nav ul {
-  min-width: 0;
-  max-width: 100%;
   list-style: none; margin: 0; padding: 0;
   display: flex; justify-content: flex-end; align-items: center;
   gap: 18px; flex-wrap: wrap;  /* wrap to avoid overflow */
@@ -282,10 +271,6 @@ body.menu-open #menu-backdrop { display: block; }
 @media (max-width: 1024px) {
   .burger { display: block; }
   header nav ul {
-  min-width: 0;
-  max-width: 100%;
-  flex-wrap: wrap;
-  justify-content: flex-end;
     position: absolute; top: 64px; right: 16px;
     width: min(90vw, 320px);
     display: none; flex-direction: column; gap: 14px;
@@ -330,18 +315,3 @@ body.menu-open #menu-backdrop { display: block; }
 .form-alert { margin-top: 12px; padding: 12px 14px; border-radius: 10px; font-weight: 600; }
 .form-success { background: rgba(46, 204, 113, 0.15); border: 1px solid rgba(46, 204, 113, 0.4); color: #2ecc71; }
 .form-error   { background: rgba(231, 76, 60, 0.15);  border: 1px solid rgba(231, 76, 60, 0.4);  color: #e74c3c; }
-
-
-/* === Anti-overflow safety (no horizontal scroll) === */
-html, body { max-width: 100%; overflow-x: hidden; }
-header { overflow-x: hidden; }
-header nav ul {
-  min-width: 0;
-  justify-content: flex-end; max-width: 100%; flex-wrap: wrap; }
-
-/* Media should never overflow */
-img, video, iframe, .instagram-media { display: block; max-width: 100% !important; height: auto; }
-.news-grid, .insta-card, .insta-embed { min-width: 0; }
-.insta-embed .instagram-media, .insta-embed iframe {
-  width: 100% !important; max-width: 100% !important; min-width: 0 !important; margin: 0 !important;
-}

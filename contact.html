@@ -1,79 +1,122 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact - Fast Forward</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-  <a class="logo" href="index.html" aria-label="Fast Forward — Accueil">
-    <img src="images/logo.png" alt="Fast Forward" class="logo-img">
-  </a>
-  <nav aria-label="Navigation principale">
-    <ul>
-      <li><a href="index.html">ACCUEIL</a></li>
-      <li><a href="news.html">NEWS</a></li>
-      <li><a href="livestream.html">LIVESTREAM / CAPTATION LIVE</a></li>
-      <li><a href="location.html">LOCATION</a></li>
-      <li><a href="consulting.html">CONSULTING</a></li>
-      <li><a href="equipe.html">QUI SOMMES-NOUS</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
-    </ul>
-  </nav>
-  <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
-    <span></span><span></span><span></span>
-  </button>
-  <div id="menu-backdrop" aria-hidden="true"></div>
-</header>
+<html lang="fr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Contact — Fast Forward</title><link href="style.css" rel="stylesheet"/><style id="ff-bugfix">/* === Fast-Forward bugfixes (desktop overflow & mobile burger) === */
+header { display:flex; align-items:center; gap:24px; padding:12px 20px; box-sizing:border-box; }
+.logo { flex:0 0 auto; }
+header nav { flex:1 1 auto; min-width:0; }
 
-  <main class="contact-page">
-    <h1 class="page-title">Contact</h1>
+/* Desktop: allow wrap to avoid overflow of "CONTACT" */
+@media (min-width: 961px) {
+  header nav ul { display:flex; flex-wrap:wrap; gap:14px 20px; justify-content:flex-end; margin:0; padding:0; list-style:none; }
+  header nav a { white-space:nowrap; text-decoration:none; }
+}
 
-    <section class="contact-form-wrapper">
-      <!-- Lead text above the form -->
-      <p class="contact-lead">Une question, une demande de devis ou une étude de faisabilité ?<br>N’hésitez pas !</p>
+/* Mobile first: menu hidden by default */
+@media (max-width: 960px) {
+  header { position: relative; }
+  button.burger { appearance:none; border:0; background:transparent; padding:10px; cursor:pointer; }
+  button.burger span { display:block; width:24px; height:2px; margin:5px 0; background:currentColor; transition:transform .2s, opacity .2s; }
+  /* Hidden menu */
+  header nav { display:none; }
+  /* Opened state */
+  header.is-open nav {
+    display:block;
+    position:fixed;
+    top:0; right:0; bottom:0;
+    width:82vw; max-width:360px;
+    background:#fff;
+    padding:24px 20px;
+    box-shadow:-10px 0 30px rgba(0,0,0,.12);
+    z-index:1001;
+    overflow:auto;
+  }
+  /* Backdrop */
+  #menu-backdrop[aria-hidden="false"] {
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.35);
+    backdrop-filter:blur(2px);
+    z-index:1000;
+    pointer-events:auto;
+  }
+  /* Burger -> X */
+  button.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  button.burger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+  button.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+/* === /bugfixes === */
+#menu-backdrop { pointer-events: none; }
+#menu-backdrop[aria-hidden="false"] {
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.35);
+    backdrop-filter:blur(2px);
+    z-index:1000;
+    pointer-events:auto;
+  }
+</style></head><body><header>
+<a aria-label="Fast Forward — Accueil" class="logo" href="index.html">
+<img alt="Fast Forward" class="logo-img" src="images/logo.png"/>
+</a>
+<nav aria-label="Navigation principale" id="menu">
+<ul>
+<li><a href="index.html">ACCUEIL</a></li>
+<li><a href="news.html">NEWS</a></li>
+<li><a href="livestream.html">LIVESTREAM / CAPTATION LIVE</a></li>
+<li><a href="location.html">LOCATION</a></li>
+<li><a href="consulting.html">CONSULTING</a></li>
+<li><a href="equipe.html">QUI SOMMES-NOUS</a></li>
+<li><a href="contact.html">CONTACT</a></li>
+</ul>
+</nav>
+<button aria-controls="menu" aria-expanded="false" aria-label="Menu" class="burger">
+<span></span><span></span><span></span>
+</button>
 
-      <form class="contact-form" action="https://formspree.io/f/mvgbgnrl" method="post" novalidat method="post">
-        <div class="form-row">
-          <input type="hidden" name="_subject" value="Nouveau message — Site Fast Forward">
-        <div class="form-field">
-            <label for="fullname">Nom complet</label>
-            <input type="text" id="fullname" name="fullname" placeholder="Votre nom" required>
-          </div>
-          <div class="form-field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="nom@domaine.com" required" name="email">
-          </div>
-        </div>
+</header><main class="contact-page"><h1 class="page-title">Contact</h1><section class="contact-form-wrapper"><p class="contact-lead">Une question, une demande de devis ou une étude de faisabilité ?<br/>N’hésitez pas !</p><form action="https://formspree.io/f/your_form_id" class="contact-form" method="post" novalidate=""><input name="_subject" type="hidden" value="Nouveau message — Site Fast Forward"/><div class="form-row"><div class="form-field"><label for="fullname">Nom complet</label><input id="fullname" name="fullname" placeholder="Votre nom" required="" type="text"/></div><div class="form-field"><label for="email">Email</label><input id="email" name="email" placeholder="nom@domaine.com" required="" type="email"/></div></div><div class="form-row"><div class="form-field"><label for="phone">Téléphone</label><input id="phone" name="phone" placeholder="+33 6 12 34 56 78" type="tel"/></div><div class="form-field"><label for="subject">Sujet</label><input id="subject" name="subject" placeholder="Sujet de votre message" required="" type="text"/></div></div><div class="form-field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Votre message..." required="" rows="6"></textarea></div><div class="form-actions"><button class="btn-primary" type="submit">Envoyer</button></div><div class="form-alert form-success" role="status" style="display:none;">Merci, votre message a bien été envoyé.</div><div class="form-alert form-error" role="alert" style="display:none;">Oups, l’envoi a échoué. Réessayez ou envoyez-nous un email.</div></form></section></main><script defer="" src="script.js"></script><div aria-hidden="true" id="menu-backdrop"></div><script id="ff-bugfix-js">
+// === Fast-Forward bugfixes: burger toggle (v2) ===
+document.addEventListener('DOMContentLoaded', () => {
+  const header   = document.querySelector('header');
+  const burger   = document.querySelector('button.burger');
+  const menu     = document.getElementById('menu');
+  const backdrop = document.getElementById('menu-backdrop');
+  const list = menu ? menu.querySelector('ul') : null;
 
-        <div class="form-row">
-          <div class="form-field">
-            <label for="phone">Téléphone</label>
-            <input type="tel" id="phone" name="phone" placeholder="+33 6 12 34 56 78">
-          </div>
-          <div class="form-field">
-            <label for="subject">Sujet</label>
-            <input type="text" id="subject" name="subject" placeholder="Sujet de votre message" required>
-          </div>
-        </div>
+  function isOpen() {
+    return burger && burger.getAttribute('aria-expanded') === 'true';
+  }
+  function setOpen(open) {
+    if (list) list.classList.toggle('show', !!open);
+    header?.classList.toggle('is-open', open);
+    if (burger) burger.setAttribute('aria-expanded', String(open));
+    if (backdrop) backdrop.setAttribute('aria-hidden', String(!open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
 
-        <div class="form-field">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="6" placeholder="Votre message..." required></textarea>
-        </div>
+  burger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setOpen(!isOpen());
+  });
 
-        <div class="form-actions">
-          <button type="submit" class="btn-primary">Envoyer</button>
-        </div>
-      
-  <div class="form-alert form-success" role="status" style="display:none;">Merci, votre message a bien été envoyé.</div>
-  <div class="form-alert form-error" role="alert" style="display:none;">Oups, l’envoi a échoué. Réessayez ou envoyez-nous un email.</div>
-</form>
-    </section>
-  </main>
+  backdrop?.addEventListener('click', () => setOpen(false));
 
-  <script src="script.js" defer></script>
-</body>
-</html>
+  // Close on ESC
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+
+  // Close when clicking any link inside the menu
+  menu?.addEventListener('click', (e) => {
+    const a = e.target && (e.target.closest ? e.target.closest('a') : null);
+    if (a) setOpen(false);
+  });
+
+  // Close when clicking anywhere outside the menu/burger (capture phase for reliability)
+  document.addEventListener('pointerdown', (e) => {
+    if (!isOpen()) return;
+    const target = e.target;
+    const withinMenu = menu && (target === menu || (target.closest && target.closest('#menu')));
+    const onBurger = burger && (target === burger || (target.closest && target.closest('button.burger')));
+    if (!withinMenu && !onBurger) {
+      setOpen(false);
+    }
+  }, true);
+});
+// === /bugfixes ===
+</script></body></html>
