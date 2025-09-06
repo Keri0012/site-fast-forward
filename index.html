@@ -51,55 +51,62 @@ header nav { flex:1 1 auto; min-width:0; }
 /* === /bugfixes === */
 #menu-backdrop { pointer-events: none; }
 #menu-backdrop[aria-hidden="false"] {
-    position:fixed; inset:0;
-    background:rgba(0,0,0,.35);
-    backdrop-filter:blur(2px);
-    z-index:1000;
-    pointer-events:auto;
-  }
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.35);
+  backdrop-filter:blur(2px);
+  z-index:1000;
+  pointer-events:auto;
+}
+
+/* Affichage vidéo */
+.hero video { display:block; width:100%; height:auto; background:#000; }
 </style>
 </head>
 <body>
 <header>
-<a aria-label="Fast Forward — Accueil" class="logo" href="index.html">
-<img alt="Fast Forward" class="logo-img" src="images/logo.png"/>
-</a>
-<nav aria-label="Navigation principale" id="menu">
-<ul>
-<li><a href="index.html">ACCUEIL</a></li>
-<li><a href="news.html">NEWS</a></li>
-<li><a href="livestream.html">LIVESTREAM / CAPTATION LIVE</a></li>
-<li><a href="location.html">LOCATION</a></li>
-<li><a href="consulting.html">CONSULTING</a></li>
-<li><a href="equipe.html">QUI SOMMES-NOUS</a></li>
-<li><a href="contact.html">CONTACT</a></li>
-</ul>
-</nav>
-<button aria-controls="menu" aria-expanded="false" aria-label="Menu" class="burger">
-<span></span><span></span><span></span>
-</button>
+  <a aria-label="Fast Forward — Accueil" class="logo" href="index.html">
+    <img alt="Fast Forward" class="logo-img" src="images/logo.png"/>
+  </a>
+  <nav aria-label="Navigation principale" id="menu">
+    <ul>
+      <li><a href="index.html">ACCUEIL</a></li>
+      <li><a href="news.html">NEWS</a></li>
+      <li><a href="livestream.html">LIVESTREAM / CAPTATION LIVE</a></li>
+      <li><a href="location.html">LOCATION</a></li>
+      <li><a href="consulting.html">CONSULTING</a></li>
+      <li><a href="equipe.html">QUI SOMMES-NOUS</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+  </nav>
+  <button aria-controls="menu" aria-expanded="false" aria-label="Menu" class="burger">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
 <section class="hero">
-  <video autoplay id="bg-video" loop muted playsinline>
-    <!-- Mobile -->
-    <source src="videos/ma_video(mobile).mp4" type="video/mp4" media="(max-width: 960px)">
-    <!-- Desktop -->
-    <source src="videos/ma_video.mp4" type="video/mp4" media="(min-width: 961px)">
+  <!-- Une seule balise <video> ; on gère la source en JS pour fiabilité mobile/iOS -->
+  <video
+    id="bg-video"
+    autoplay
+    muted
+    playsinline
+    webkit-playsinline
+    x-webkit-airplay="allow"
+    preload="auto">
     Votre navigateur ne supporte pas la vidéo.
   </video>
 </section>
 
 <section class="content-section">
-<h2>OFFREZ A VOS EVENEMENTS L’IMPACT D’UNE CAPTATION VIDEO PRO</h2>
-<p>
-      Notre dispositif vidéo s’adapte à des projets d’envergure (conférences, meetings, salons) 
-      comme à des projets plus confidentiels comme des webinars, visioconférences, vidéos de formation, ateliers filmés.<br/><br/>
-      Fast Forward vous apporte tout son savoir-faire dans la conception vidéo. 
-      Son équipe est constituée de professionnels ayant travaillé de nombreuses années en événementiel et en télévision. 
-      Nous saurons répondre à vos besoins en mettant en œuvre les moyens techniques adaptés à votre projet.<br/><br/>
-      Découvrez nos services.
-    </p>
+  <h2>OFFREZ A VOS EVENEMENTS L’IMPACT D’UNE CAPTATION VIDEO PRO</h2>
+  <p>
+    Notre dispositif vidéo s’adapte à des projets d’envergure (conférences, meetings, salons) 
+    comme à des projets plus confidentiels comme des webinars, visioconférences, vidéos de formation, ateliers filmés.<br/><br/>
+    Fast Forward vous apporte tout son savoir-faire dans la conception vidéo. 
+    Son équipe est constituée de professionnels ayant travaillé de nombreuses années en événementiel et en télévision. 
+    Nous saurons répondre à vos besoins en mettant en œuvre les moyens techniques adaptés à votre projet.<br/><br/>
+    Découvrez nos services.
+  </p>
 </section>
 
 <script defer src="script.js"></script>
@@ -141,18 +148,134 @@ document.addEventListener('DOMContentLoaded', () => {
     if (a) setOpen(false);
   });
 
-  // Close when clicking anywhere outside the menu/burger (capture phase for reliability)
+  // Close when clicking anywhere outside le menu/burger
   document.addEventListener('pointerdown', (e) => {
     if (!isOpen()) return;
     const target = e.target;
     const withinMenu = menu && (target === menu || (target.closest && target.closest('#menu')));
     const onBurger = burger && (target === burger || (target.closest && target.closest('button.burger')));
-    if (!withinMenu && !onBurger) {
-      setOpen(false);
-    }
+    if (!withinMenu && !onBurger) setOpen(false);
   }, true);
 });
 // === /bugfixes ===
 </script>
+
+<script>
+// === Sélecteur vidéo desktop/mobile ultra-robuste ===
+(function () {
+  const video = document.getElementById('bg-video');
+
+  // Chemins possibles (on gère parenthèses **et** variante renommée sans parenthèses)
+  const SRC_DESKTOP = 'videos/ma_video.mp4';
+  const MOBILE_CANDIDATES = [
+    'videos/ma_video_mobile.mp4',       // si tu renommes (recommandé)
+    'videos/ma_video(mobile).mp4',      // si tu gardes les parenthèses
+    'videos/ma_video%28mobile%29.mp4'   // version encodée des parenthèses
+  ];
+
+  // Détection "mobile" robuste (largeur, pointeur tactile, UA)
+  const mqlWidth   = window.matchMedia('(max-width: 960px)');
+  const mqlPointer = window.matchMedia('(pointer: coarse)');
+  function isMobileLike () {
+    return mqlWidth.matches || mqlPointer.matches || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  let currentKey = ''; // 'desktop' | 'mobile'
+  let currentUrl = '';
+
+  function withBust(url, tag) {
+    const qs = (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + tag + '-' + Date.now();
+    return url + qs;
+  }
+
+  function tryLoad(urls, tag) {
+    return new Promise((resolve) => {
+      let i = 0;
+
+      const tryOne = () => {
+        if (i >= urls.length) return resolve(false);
+
+        const url = withBust(urls[i], tag);
+        i++;
+
+        // Nettoie et applique la source
+        video.pause();
+        video.removeAttribute('src');
+        while (video.firstChild) video.removeChild(video.firstChild);
+        video.src = url;
+        currentUrl = url;
+
+        let settled = false;
+        const onCanPlay = async () => {
+          if (settled) return;
+          settled = true;
+          cleanup();
+          try { await video.play(); } catch (_) {}
+          resolve(true);
+        };
+        const onError = () => {
+          if (settled) return;
+          cleanup();
+          // Essaye le suivant
+          tryOne();
+        };
+        const onStalledTimeout = setTimeout(() => {
+          if (settled) return;
+          cleanup();
+          tryOne();
+        }, 4000); // si rien ne se passe, on tente le suivant
+
+        function cleanup () {
+          video.removeEventListener('loadeddata', onCanPlay);
+          video.removeEventListener('canplay', onCanPlay);
+          video.removeEventListener('error', onError);
+          clearTimeout(onStalledTimeout);
+        }
+
+        video.addEventListener('loadeddata', onCanPlay, { once:true });
+        video.addEventListener('canplay', onCanPlay, { once:true });
+        video.addEventListener('error', onError, { once:true });
+        video.load();
+      };
+
+      tryOne();
+    });
+  }
+
+  async function setForContext() {
+    const wantMobile = isMobileLike();
+    const wantKey = wantMobile ? 'mobile' : 'desktop';
+    if (currentKey === wantKey) return;
+
+    if (wantMobile) {
+      const ok = await tryLoad(MOBILE_CANDIDATES, 'm');
+      if (!ok) {
+        // En dernier recours, on retombe sur la desktop pour ne pas rester en écran noir.
+        await tryLoad([SRC_DESKTOP], 'd');
+      }
+    } else {
+      await tryLoad([SRC_DESKTOP], 'd');
+    }
+    currentKey = wantKey;
+  }
+
+  // Initial
+  setForContext();
+
+  // Bascule live (rotation/resize/changement de pointeur)
+  const onChange = () => setForContext();
+  if (mqlWidth.addEventListener) {
+    mqlWidth.addEventListener('change', onChange);
+    mqlPointer.addEventListener('change', onChange);
+  } else {
+    mqlWidth.addListener(onChange);
+    mqlPointer.addListener(onChange);
+  }
+
+  // Si la lecture échoue plus tard, on retente la sélection
+  video.addEventListener('error', onChange);
+})();
+</script>
+
 </body>
 </html>
