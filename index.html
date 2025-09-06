@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="utf-8"/>
@@ -58,7 +57,8 @@ header nav { flex:1 1 auto; min-width:0; }
     z-index:1000;
     pointer-events:auto;
   }
-</style></head>
+</style>
+</head>
 <body>
 <header>
 <a aria-label="Fast Forward — Accueil" class="logo" href="index.html">
@@ -79,25 +79,16 @@ header nav { flex:1 1 auto; min-width:0; }
 <span></span><span></span><span></span>
 </button>
 </header>
+
 <section class="hero">
-<video autoplay="" id="bg-video" loop="" muted="" playsinline="">
-<source src="videos/ma_video.mp4" type="video/mp4"/>
-      Votre navigateur ne supporte pas la vidéo.
-    </video>
+  <video autoplay id="bg-video" loop muted playsinline>
+    <!-- Mobile -->
+    <source src="videos/ma_video(mobile).mp4" type="video/mp4" media="(max-width: 960px)">
+    <!-- Desktop -->
+    <source src="videos/ma_video.mp4" type="video/mp4" media="(min-width: 961px)">
+    Votre navigateur ne supporte pas la vidéo.
+  </video>
 </section>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const video = document.getElementById("bg-video");
-    const source = document.getElementById("video-source");
-
-    // Vérifie si on est en mode mobile (< 961px, comme dans tes media queries)
-    if (window.matchMedia("(max-width: 960px)").matches) {
-      source.src = "videos/ma_video (mobile).mp4";
-      video.load(); // recharge la bonne vidéo
-    }
-  });
-</script>
 
 <section class="content-section">
 <h2>OFFREZ A VOS EVENEMENTS L’IMPACT D’UNE CAPTATION VIDEO PRO</h2>
@@ -110,8 +101,10 @@ header nav { flex:1 1 auto; min-width:0; }
       Découvrez nos services.
     </p>
 </section>
-<script defer="" src="script.js"></script>
-<div aria-hidden="true" id="menu-backdrop"></div><script id="ff-bugfix-js">
+
+<script defer src="script.js"></script>
+<div aria-hidden="true" id="menu-backdrop"></div>
+<script id="ff-bugfix-js">
 // === Fast-Forward bugfixes: burger toggle (v2) ===
 document.addEventListener('DOMContentLoaded', () => {
   const header   = document.querySelector('header');
@@ -160,5 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, true);
 });
 // === /bugfixes ===
-</script></body>
+</script>
+</body>
 </html>
