@@ -85,6 +85,20 @@ header nav { flex:1 1 auto; min-width:0; }
       Votre navigateur ne supporte pas la vidéo.
     </video>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const video = document.getElementById("bg-video");
+    const source = document.getElementById("video-source");
+
+    // Vérifie si on est en mode mobile (< 961px, comme dans tes media queries)
+    if (window.matchMedia("(max-width: 960px)").matches) {
+      source.src = "videos/ma_video (mobile).mp4";
+      video.load(); // recharge la bonne vidéo
+    }
+  });
+</script>
+
 <section class="content-section">
 <h2>OFFREZ A VOS EVENEMENTS L’IMPACT D’UNE CAPTATION VIDEO PRO</h2>
 <p>
