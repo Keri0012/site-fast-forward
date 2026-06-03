@@ -61,7 +61,23 @@ header nav { flex:1 1 auto; min-width:0; }
     color: #fff !important;
   }
 }
-/* === /override === */</style><script async="True" src="https://www.instagram.com/embed.js"></script></head>
+/* === /override === */</style><script async="True" src="https://www.instagram.com/embed.js"></script>
+<style id="ig-layout-fix">
+body{background:#000;}
+.instagram-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+}
+@media (max-width:960px){
+  .instagram-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:640px){
+  .instagram-grid{grid-template-columns:1fr;}
+}
+</style>
+
+</head>
 <body>
 <header>
 <a aria-label="Fast Forward — Accueil" class="logo" href="index.html">
@@ -97,6 +113,13 @@ header nav { flex:1 1 auto; min-width:0; }
 <!-- Script Instagram (à mettre une seule fois) -->
 <script id="ig-dynamic-embed">(function(){
   const IG_POSTS = [
+      "https://www.instagram.com/p/DQU1XvyDO6Q/?img_index=1",
+      "https://www.instagram.com/p/DRcAJ__igs8/?img_index=1",
+      "https://www.instagram.com/p/DSCRnRLigLZ/?img_index=1",
+      "https://www.instagram.com/p/DTZzVlOCtrZ/",
+      "https://www.instagram.com/p/DTsazkbCnVq/?img_index=1",
+      "https://www.instagram.com/p/DVWzmEQCtSE/",
+      "https://www.instagram.com/p/DWolykminUQ/?img_index=1",
       "https://www.instagram.com/p/DOCKCBfimUk/?img_index=1",
       "https://www.instagram.com/p/Czyxqv5tUCs/?img_index=2",
       "https://www.instagram.com/p/CzlmfydNaLp/",
