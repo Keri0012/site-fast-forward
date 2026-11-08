@@ -1,0 +1,16 @@
+{
+  "_mode_d_emploi": "Facultatif. Complète ou corrige un post sans toucher à Instagram. La clé est le code du post, visible dans son adresse : instagram.com/p/CODE/. Tous les champs sont optionnels. Supprime l'exemple ci-dessous ou remplace CODE_DU_POST par un vrai code.",
+  "_exemple": {
+    "titre": "Livestream de la convention annuelle d'un grand groupe",
+    "description": "Premier paragraphe.\n\nDeuxième paragraphe.",
+    "alt": "Régie vidéo installée en fond de salle pendant la convention",
+    "fiche_technique": {
+      "Type": "Conférence hybride",
+      "Lieu": "Paris 8e",
+      "Caméras": "4 caméras dont 1 PTZ",
+      "Régie": "ATEM Constellation HD",
+      "Diffusion": "Microsoft Teams",
+      "Public": "300 en salle, 1 200 en ligne"
+    }
+  }
+}

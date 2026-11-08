@@ -1,0 +1,65 @@
+/* =====================================================================
+   Page NEWS — fiches de réalisation générées depuis Instagram
+   Reprend l'esthétique du site : fond noir, texte blanc, Red Hat Display
+   ===================================================================== */
+
+.news-section { max-width: 1100px; }
+.news-intro { max-width: 720px; margin: 0 auto 48px; opacity: .85; }
+.news-follow { margin-top: 56px; }
+.news-section a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.news-section a:hover { opacity: .75; }
+
+.projets {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 32px;
+  text-align: left;
+}
+
+.projet {
+  display: flex;
+  flex-direction: column;
+  background: #0d0d0d;
+  border: 1px solid #222;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.projet-media { position: relative; display: block; aspect-ratio: 1 / 1; background: #111; overflow: hidden; }
+.projet-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+.projet-media:hover img { transform: scale(1.03); }
+.projet-badge {
+  position: absolute; top: 12px; right: 12px;
+  background: rgba(0,0,0,.65); color: #fff;
+  font-size: 12px; font-weight: 700; letter-spacing: .04em;
+  padding: 4px 10px; border-radius: 999px;
+}
+
+.projet-body { display: flex; flex-direction: column; gap: 14px; padding: 22px 24px 26px; flex: 1; }
+.projet-date { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; opacity: .6; }
+.projet-body h2 { font-size: 20px; line-height: 1.3; margin: 0; }
+.projet-texte p { margin: 0 0 10px; font-size: 15px; line-height: 1.6; opacity: .9; }
+
+.fiche-technique {
+  border-top: 1px solid #2a2a2a;
+  padding-top: 14px;
+  margin-top: 4px;
+}
+.fiche-technique h3 {
+  font-size: 12px; text-transform: uppercase; letter-spacing: .12em;
+  margin: 0 0 10px; opacity: .6;
+}
+.fiche-technique dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; font-size: 14px; }
+.fiche-technique dt { font-weight: 700; }
+.fiche-technique dd { margin: 0; opacity: .9; }
+.fiche-technique ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.fiche-technique li { border: 1px solid #333; border-radius: 999px; padding: 4px 12px; font-size: 13px; }
+
+.projet-lien { margin-top: auto; font-size: 14px; font-weight: 700; }
+
+@media (max-width: 760px) {
+  .projets { grid-template-columns: 1fr; gap: 32px; }
+  .projet-body { padding: 18px 18px 22px; }
+  .fiche-technique dl { grid-template-columns: 1fr; gap: 2px; }
+  .fiche-technique dd { margin-bottom: 8px; }
+}
