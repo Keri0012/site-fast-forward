@@ -1,0 +1,15 @@
+FAST FORWARD - SITE OPTIMISÉ POUR LE RÉFÉRENCEMENT
+===================================================
+
+1. Faites une sauvegarde de votre site actuel.
+2. Téléversez TOUT le contenu de ce dossier à la racine de votre site
+   (au même endroit que index.html), en remplaçant les fichiers existants.
+   - Le dossier "images" ne contient que 2 NOUVELLES images : vos images
+     actuelles (logo, photo regie, etc.) ne sont pas touchées.
+   - integration.html est une nouvelle page.
+   - robots.txt et sitemap.xml sont nouveaux.
+   - style.css, script.js, nav-fix.css, menu-fix.js et vos vidéos restent
+     inchangés : ne les supprimez pas.
+3. Vérifiez le site en ligne (menu, vidéo, formulaire de contact).
+4. Inscrivez le site sur Google Search Console et soumettez :
+   https://www.fast-forward-video.com/sitemap.xml
